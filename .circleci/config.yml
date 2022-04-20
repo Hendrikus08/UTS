@@ -1,26 +1,63 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pp | Hendrikus</title>
+</head>
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+<body>
+    <header>
+        <h4>Data Pemantaun Covid19 Wilayah DKI Jakarta
+Per 20 April 2022 22:07:23 
+HENDRIKUS SUDARSO/191011400802</h3>
+    </header>
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  say-hello-workflow:
-    jobs:
-      - say-hello
+    <nav>
+        <a href="form-daftar.php"> </a>
+    </nav>
+
+    <br>
+
+    <table border="1">
+    <thead>
+        <tr>
+            <th>Positif</th>
+            <th>dirawat</th>
+            <th>sembuh</th>
+            <th>meninggal</th>
+        </tr>
+            <th>1..245.653</th>
+            <th>411t</th>
+            <th>1.227.793</th>
+            <th>15.244</th>
+    </thead>
+    <tbody>
+
+        <?php
+        $sql = "SELECT * FROM calon_siswa";
+        $query = mysqli_query($db, $sql);
+
+        while($siswa = mysqli_fetch_array($query)){
+            echo "<tr>";
+
+            echo "<td>".$siswa['id']."</td>";
+            echo "<td>".$siswa['positif']."</td>";
+            echo "<td>".$siswa['dirawat']."</td>";
+            echo "<td>".$siswa['meninggal']."</td>";
+            echo "<td>".$siswa['agama']."</td>";
+            
+            echo "<td>";
+            echo "<a href='form-edit.php?id=".$siswa['id']."'>Edit</a> | ";
+            echo "<a href='hapus.php?id=".$siswa['id']."'>Hapus</a>";
+            echo "</td>";
+
+            echo "</tr>";
+        }
+        ?>
+
+    </tbody>
+    </table>
+
+    <p>Total: <?php echo mysqli_num_rows($query) ?></p>
+
+    </body>
+</html>
